@@ -34,7 +34,7 @@ const Modal = <T,>({ type, data, id, table }: ModalType<T>) => {
         : type === "update"
           ? "w-8 h-8 rounded-full bg-cyan-100 hover:bg-cyan-200 transition-colors flex items-center justify-center cursor-pointer"
           : "";
-  const formsData = {
+  const formsData: Record<string, any> = {
     teacher: (type: any, data?: string | undefined) => (
       <Teacherform type={type} data={data} />
     ),
