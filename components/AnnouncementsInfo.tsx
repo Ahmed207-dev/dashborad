@@ -76,7 +76,7 @@ const AnnouncementsInfo = () => {
       <div className="flex justify-between items-center rounded-xl">
         <h1 className="font-bold hidden md:block">All Announcements</h1>
         <div className="flex justify-center items-center gap-4 flex-col md:flex-row w-100">
-          <div className="flex items-center justify-center gap-3 ring-1 rounded-full p-2 ring-gray-300">
+          <div className="flex items-center justify-center gap-3 ring-1 rounded-full p-1 ring-gray-300">
             <Image
               src={searchbar}
               alt="Search-Teacher"

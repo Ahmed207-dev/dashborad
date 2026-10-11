@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 
 const layoutDasboard = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-col md:flex-row">
       <div className="flex-1">
         <Menu />
       </div>

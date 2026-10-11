@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 export default function Home() {
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-col md:flex-row">
         <div className="flex-1">
           <Menu />
         </div>

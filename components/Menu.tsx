@@ -1,9 +1,11 @@
 "use client";
+
 import { role } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.png";
 import { usePathname } from "next/navigation";
+
 const menuItems = [
   {
     title: "MENU",
@@ -120,50 +122,67 @@ const menuItems = [
 ];
 
 const Menu = () => {
-  const pasthname = usePathname();
+  const pathname = usePathname();
 
-  const IsActive = (stat: string) => {
-    return stat === pasthname
-      ? "flex items-center justify-center md:justify-start p-3 gap-2 text-gray-500 hover:bg-gray-100 bg-gray-100"
-      : "flex items-center justify-center md:justify-start p-3 gap-2 text-gray-500 hover:bg-gray-100";
-  };
   return (
-    <div className="bg-white shadow-2xl">
-      <div className="flex items-center gap-2 p-2 justify-center md:justify-start">
-        <Image src={Logo} alt="Logo" width={32} height={32} />
-        <Link href="/" className="hidden md:block font-bold ">
-          SchoolLama
+    <div className="bg-white p-3 flex flex-col gap-4 border-r border-gray-100 shadow-sm ">
+      <div className="flex items-center gap-3 p-2 justify-center md:justify-start">
+        <Link
+          href="/"
+          className="flex items-center gap-3 font-bold text-gray-800"
+        >
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
+          <span className="hidden md:block text-lg tracking-tight">
+            SchoolLama
+          </span>
         </Link>
       </div>
-      {menuItems.map((item, index) => (
-        <div key={index}>
-          <span className="hidden md:block text-gray-400 p-2 my-3">
-            {item.title}
-          </span>
-          <span>
-            {item.items.map((menu, i) => {
-              if (menu.visible.includes(role)) {
-                return (
-                  <Link
-                    key={i}
-                    href={menu.href}
-                    className={IsActive(menu.href)}
-                  >
-                    <Image
-                      src={menu.icon}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="shrink-0  md:shrink-2"
-                    />
-                    <span className="hidden md:block">{menu.label}</span>
-                  </Link>
-                );
-              }
-            })}
-          </span>
-        </div>
-      ))}
+
+      <nav className="flex flex-col gap-4">
+        {menuItems.map((section, index) => (
+          <div key={index} className="flex flex-col gap-1">
+            <span className="hidden md:block text-xs font-semibold text-gray-400 uppercase px-3 my-1">
+              {section.title}
+            </span>
+
+            <div className="flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-visible [&::-webkit-scrollbar]:hidden">
+              {section.items
+                .filter((item) => item.visible.includes(role))
+                .map((menu) => {
+                  const isActive = pathname === menu.href;
+                  return (
+                    <Link
+                      key={menu.label}
+                      href={menu.href}
+                      className={`flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? "bg-purple-600 text-white shadow-md shadow-purple-200"
+                          : "text-gray-500 hover:bg-purple-50 hover:text-purple-600"
+                      }`}
+                    >
+                      <Image
+                        src={menu.icon}
+                        alt={menu.label}
+                        width={20}
+                        height={20}
+                        className={`shrink-0 transition-all ${
+                          isActive ? "brightness-200 invert" : "opacity-70"
+                        }`}
+                      />
+                      <span className="hidden md:block">{menu.label}</span>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
+        ))}
+      </nav>
     </div>
   );
 };
