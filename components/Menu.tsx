@@ -125,7 +125,7 @@ const Menu = () => {
   const pathname = usePathname();
 
   return (
-    <div className="bg-white p-3 flex flex-col gap-4 border-r border-gray-100 shadow-sm ">
+    <div className="bg-white p-3 flex flex-col gap-4 border-r border-gray-100 shadow-sm">
       <div className="flex items-center gap-3 p-2 justify-center md:justify-start">
         <Link
           href="/"

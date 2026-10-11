@@ -34,6 +34,7 @@ const Modal = <T,>({ type, data, id, table }: ModalType<T>) => {
         : type === "update"
           ? "w-8 h-8 rounded-full bg-cyan-100 hover:bg-cyan-200 transition-colors flex items-center justify-center cursor-pointer"
           : "";
+
   const formsData: Record<string, any> = {
     teacher: (type: any, data?: string | undefined) => (
       <Teacherform type={type} data={data} />
@@ -66,10 +67,12 @@ const Modal = <T,>({ type, data, id, table }: ModalType<T>) => {
         <Image src={`/${type}.png`} alt="" width={16} height={16} />
       </button>
       {open && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-2">
-          <div className="relative bg-white rounded-lg shadow-lg p-5">
-            <h1 className="font-bold text-lg mb-5">
-              {type} A new {table}
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          {/* Container المودال مع خاصية Scroll للشاشات الصغيرة */}
+          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 md:p-8">
+
+            <h1 className="font-bold text-xl sm:text-2xl text-gray-800 mb-6">
+              {type === "create" ? "Create New Teacher" : "Update Teacher"}
             </h1>
             <Form />
             <button
